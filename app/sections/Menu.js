@@ -1,6 +1,8 @@
 import React from 'react';
 import {StyleSheet, View, TouchableOpacity, Image, Text, Alert} from 'react-native';
 import { Ionicons,MaterialCommunityIcons} from '@expo/vector-icons';
+import { Video } from 'expo';
+
 
 
 export class Menu extends React.Component{
@@ -21,22 +23,23 @@ export class Menu extends React.Component{
                     <Text style={styles.buttonTextLogin}>LOGIN</Text>
                 </TouchableOpacity>
                </View>
-               <View style={styles.buttonRow}>
-                <TouchableOpacity style={styles.buttonContact} onPress={ ()=>this.props.navigate('WelcomeRT')}>
+               <View style={styles.buttonColumn}>
+                <TouchableOpacity style={styles.buttonFacebook} onPress={ ()=>this.props.navigate('WelcomeRT')}>
                 <MaterialCommunityIcons
                     style={styles.iconLeft} name="facebook" size={25} color="#2F7DD8" />
                     <Text style={styles.buttonText}>Connect with Facebook</Text>
                 </TouchableOpacity>
                </View>
-               <View style={styles.buttonRow}>
+               {/* <View style={styles.buttonColumn}>
                 <TouchableOpacity style={styles.buttonGoogle} onPress={ ()=>this.props.navigate('StackRT')}>
-                
-                    <Ionicons style={styles.iconLeft} name="logo-google" size={20} color="green" />
 
-                    <Text style={styles.buttonText}>Connect with Google</Text>
+                    <Image style={styles.iconGoogle} source={require('../../app/src/assets/images/content/google.png')}/>
+                
+
+                    <Text style={styles.GoogleText}>Connect with Google</Text>
                   
                 </TouchableOpacity>
-               </View>
+               </View>  */}
 
            </View>
         )
@@ -45,115 +48,96 @@ export class Menu extends React.Component{
 const styles = StyleSheet.create({
 
     container:{
-        position:'relative',
-        marginTop:'40%'
-        
-        
+        flex:1,
     },
     buttonRow:{
+        flex:1,
         flexDirection: 'row',
+        justifyContent:'center',
         alignItems: 'center',
-        padding:35,
-    
-
-
+        paddingVertical: 50,
+    },
+    buttonColumn:{
+        flex:1,
+        alignItems:'center',
     },
     buttonSignUp:{
-        position: 'absolute',
-        left: '8.21%',
-        right: '39.37%',
-        top: '61.96%',
-        width:217,
-        height:60,
-        bottom: '29.89%',
         backgroundColor: '#FFFFFF',
-        borderRadius:30
+        borderRadius:30,
+        width:'50%',
+        textAlign:'center',
+        height:60,
+        justifyContent:'center',
+       
         
     },
     buttonLogin:{
-        position: 'absolute',
-        left: '75.22%',
-        right: '8.21%',
-        height:60,
-        width:110,
-        top: '61.96%',
-        bottom: '29.89%',
         backgroundColor: '#FFFFFF',
-        borderRadius:30
+        borderRadius:30,
+        width:"30%",
+        height:60,
+        justifyContent: 'center',
+        marginLeft:15,
+        textAlign:'center',
     },
-    buttonContact:{
-        position:'absolute',
-        left: "8.21%",
-        right: '8.21%',
-        top: '72.83%',
-        bottom: '19.02%',
+    buttonFacebook:{
+        flexDirection:'row',
         backgroundColor: '#FFFFFF',
         borderRadius: 30,
-        width:346,
-        height:60,
+        width:'70%',
+        alignItems:'center',
+        justifyContent:'center'
+        
     },
     inputIcon:{
-        width:15,
-        height:15,
-        marginTop: 15,
-        marginLeft:80,
-        justifyContent: 'center'
+        // marginTop: 15,
+        // marginLeft:80,
+        // justifyContent: 'center'
     },
     buttonGoogle:{
-        position: "absolute",
-        left:' 8.21%',
-        right: '8.21%',
-        top: '83.7%',
-        height:60,
-        width:346,
-        bottom: '8.15%',
         backgroundColor: '#FFFFFF',
         borderRadius: 30,
 
     },
     buttonText:{
-        color:'#2F7DD8',
-        fontSize: 16,
-        left:'27.47%',
-        right:'20.67%',
-        bottom:'35.6%',
         fontStyle: 'normal',
         fontWeight: '500',
-        fontFamily:'Montserrat-Regular'
+        fontFamily:'Montserrat-Meduim'
 
     },
     buttonTextSignUp:{
-        position: 'absolute',
-        left: '15.98%',
-        // right: '14.98%',
-        top: '35.81%',
-        bottom: '32.47%',
         fontSize: 16,
         color: '#2F7DD8',
         fontStyle: 'normal',
         fontWeight: '500',
-        fontFamily:'Montserrat-Regular',
-        textAlign: 'center'
+        fontFamily:'Montserrat-Meduim',
+        textAlign:'center',
+
     },
     buttonTextLogin:{
-        position: 'absolute',
-        left: '28.98%',
-        right: '14.98%',
-        top: '35.81%',
-        bottom: '32.47%',
         fontStyle: 'normal',
         fontWeight: '500',
         fontSize: 16,
         color: '#2F7DD8',
-        fontFamily:'Montserrat-Regular'
+        fontFamily:'Montserrat-Meduim',
+        textAlign:'center'
     },
     iconLeft:{
-        paddingLeft:70,
-        paddingRight: 40,
-        paddingTop: 15,
+        justifyContent:'center'
        
+    },
+    iconGoogle:{
+    },
+    GoogleText:{
+        color:'#2F7DD8',
+        fontSize: 16,
+        fontStyle: 'normal',
+        fontWeight: '500',
+        fontFamily:'Montserrat-Meduim'
+
+
+
     }
-    
     
 
 })

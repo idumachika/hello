@@ -3,7 +3,7 @@ import fonts from './fonts';
 
 export default {
   container: {
-    backgroundColor: colors.bgGrey,
+    backgroundColor: 'black',
     flex: 1
   },
   centerItems: {
@@ -46,12 +46,11 @@ export default {
   },
   heading: {
     color: colors.heading,
-    // fontFamily: fonts.medium,
     fontSize: 18,
     marginBottom: 4,
     marginLeft: 4,
     marginTop: 13,
-    fontFamily:'Montserrat-Regular'
+    fontFamily:'Montserrat-SemiBold'
 
 
   },

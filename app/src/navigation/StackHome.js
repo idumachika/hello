@@ -8,10 +8,11 @@ import HomeScreen from '../screens/Home';
 import TvShowsScreen from '../screens/TvShows';
 import MoviesScreen from '../screens/Movies';
 import MyListScreen from '../screens/MyList';
-
+import { Ionicons } from '@expo/vector-icons';
 import SvgHome from '../components/icons/Svg.Home';
 
 const Icon = ({ focused }) => <SvgHome active={focused} />;
+// const Icon =({focused})=><Ionicons name="md-home" size={30} color="white" active={focused}/>
 
 Icon.propTypes = {
   // required
@@ -44,6 +45,7 @@ export default createStackNavigator(
     HomeMovies: {
       screen: MoviesScreen,
       navigationOptions: {
+        active:true,
         gesturesEnabled: false,
         headerStyle: gStyle.navHeaderStyle
       }

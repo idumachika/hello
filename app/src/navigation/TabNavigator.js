@@ -5,14 +5,16 @@ import { colors } from '../constants';
 import StackHome from './StackHome';
 import StackSearch from './StackSearch';
 import StackDownloads from './StackDownloads';
+import Favourite from './StackFavourite';
 import StackMore from './StackMore';
 
 export default createBottomTabNavigator(
   {
     StackHome,
+    Favourite,
     StackSearch,
     StackDownloads,
-    StackMore
+    // StackMore
   },
   {
     initialRouteName: 'StackHome',
@@ -20,7 +22,7 @@ export default createBottomTabNavigator(
       activeTintColor: colors.white,
       inactiveTintColor: colors.inactiveGrey,
       style: {
-        backgroundColor: colors.black,
+        backgroundColor: '#363636',
         borderTopWidth: 0
       }
     }

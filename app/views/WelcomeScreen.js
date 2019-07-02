@@ -1,18 +1,16 @@
-import React from 'react';
+import React,{Component} from 'react';
 import { View, Text, Dimensions, BackHandler,ImageBackground,TouchableOpacity, KeyboardAvoidingView } from 'react-native';
 import { AppLoading, Asset, Video } from 'expo';
 import Swiper from 'react-native-swiper';
 import {Home} from './Home';
 import { Ionicons } from '@expo/vector-icons';
-const { height, width } = Dimensions.get('window');
-
-
+const { height, width,MaterialIcons, Octicons } = Dimensions.get('window');
 import { createStackNavigator } from 'react-navigation'
 import Animated from 'react-native-reanimated';
 
 // 1.5.9
 
-export class WelcomeScreen extends React.Component {
+ class WelcomeScreen extends Component {
 
     static navigationOptions = {
         header:null
@@ -25,25 +23,29 @@ export class WelcomeScreen extends React.Component {
         backgroundOpacity:new Animated.Value(0),
         loaded: false,
         videoHeight: height,
-        videoWidth: width
+        videoWidth: width,
+        currentVideo: 0,
+          mute: false,
+          shouldPlay: true,
       }
     }
-  /////***** HANDLE BACK PRESS ******//////
-  componentWillMount() {
-    // Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.PORTRAIT);
-    BackHandler.addEventListener('hardwareBackPress', this.onBackPress);
-  }
-
-  componentWillUnmount() {
-    console.log('unmount dashboard');
-    BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
-  }
+  
   onPress =()=>{
     this.props.navigation.navigate('HomeRT');
   }
   onHome =()=>{
     this.props.navigation.navigate('StackRT');
 
+  }
+  handlePlayAndPause = () => {
+    this.setState((prevState) => ({
+       shouldPlay: !prevState.shouldPlay
+    }));
+  }
+  handleVolume = () => {
+     this.setState((prevState) => ({
+        mute: !prevState.mute
+     }));
   }
 
 
@@ -62,6 +64,8 @@ export class WelcomeScreen extends React.Component {
 
   render() {
     const { navigate } = this.props.navigation
+    const { width } = Dimensions.get('window')
+
 
     return (
       <Swiper showsPagination={false}
@@ -77,41 +81,46 @@ export class WelcomeScreen extends React.Component {
         </TouchableOpacity>
 
         </View>
-        <View style={styles.slide3}>
+        <View>
+         <View style={styles.slide3}>
+               
+               {/* <Video
+                 source={{ uri:    
+                    'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4' }}
+                 shouldPlay={this.state.shouldPlay}
+                 resizeMode="cover"
+                 style={{height:1000, opacity:0.3, backgroundColor:'#000000' }}
+                 isMuted={this.state.mute}
+               /> */}
+              {/* <View style={styles.controlBar}>
+                   <MaterialIcons
+                      name={this.state.mute ? "volume-mute" :
+                          "volume-up"}
+                      size={45}
+                      color="white"
+                      onPress={this.handleVolume}
+                   />
+                   <MaterialIcons
+                      name={this.state.shouldPlay ? "pause" : 
+                           "play-arrow"}
+                      size={45}
+                      color="white"
+                      onPress={this.handlePlayAndPause}
+                   />
+               </View>  */}
+            </View>
+        
 
-              <Video
-              source={{ uri: "https://s3-eu-west-1.amazonaws.com/video.gallereplay.com/artistarea/Lighthouse%20stands%20in%20Istanbul%E2%80%99s%20harbour_0554659b-5dc1-43d6-8a93-b31ec6b67f63/Cinemagraph_plain/1920x1080/cinemagraph.mp4"}}
-              style={styles.backgroundVideo}
-              rate={1}
-              shouldPlay={true}
-              isLooping={true}
-              volume={1}
-              muted={true}
-              resizeMode="cover"
-              />
-
-              <KeyboardAvoidingView behavior='padding' style={styles.container}>
-
-
-                <View style={styles.loginContainer}>
-
-
-                </View>
-
-              </KeyboardAvoidingView>
-              </View>
+        </View>
        
-        {/* <ImageBackground   source={require('../sections/img/Rectangle.png')} style={styles.container}>
-
-         
-          
-        </ImageBackground> */}
+       
 
       </Swiper>
     );
   }
 }
 
+export default WelcomeScreen;
 const styles = {
   
   wrapper: {},
@@ -128,10 +137,9 @@ const styles = {
     backgroundColor: '#2F7DD8',
   },
   slide3: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    height:1000,
     backgroundColor: '#2F7DD8',
+    
   },
   text: {
     color: '#fff',
@@ -164,6 +172,20 @@ backgroundVideo: {
   right: 0,
 },
 
+controlBar: {
+  position: 'absolute',
+  bottom: 0,
+  left: 0,
+  right: 0,
+  height: 45,
+  flexDirection: 'row',
+  alignItems: 'center',
+  justifyContent: 'center',
+  backgroundColor: "rgba(0, 0, 0, 0.5)",
+
+
+
+}
 };
 
 

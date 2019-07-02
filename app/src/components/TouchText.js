@@ -1,13 +1,15 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity,TouchableHighlight } from 'react-native';
 import PropTypes from 'prop-types';
 import { colors, fonts } from '../constants';
 
-const TouchText = ({ onPress, text, textStyle }) => (
+const TouchText = ({ onPress, text, textStyle}) => (
+  
   <TouchableOpacity
     activeOpacity={0.7}
+    underlayColor='blue'
     onPress={onPress}
-    style={styles.container}
+
   >
     <Text style={[styles.text, textStyle]}>{text}</Text>
   </TouchableOpacity>
@@ -32,10 +34,11 @@ const styles = StyleSheet.create({
   },
   text: {
     color: colors.white,
-    fontFamily:'Montserrat-Regular',
+    fontFamily:'Montserrat-SemiBold',
 
     // fontFamily: fonts.medium
   }
+  
 });
 
 export default TouchText;

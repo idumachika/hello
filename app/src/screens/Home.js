@@ -1,35 +1,68 @@
 import React from 'react';
-import { ScrollView, Text, View,StyleSheet,Animated,  TouchableOpacity,Image} from 'react-native';
+import { ScrollView, Text, View,StyleSheet,Animated,StatusBar,Dimensions} from 'react-native';
 import PropTypes from 'prop-types';
 import { gStyle,colors, device, fonts, images  } from '../constants';
-
-
-
 import Cast from '../components/Cast';
-import HeaderHome from '../components/HeaderHome';
 import PromotionBanner from '../components/PromotionBanner';
 import ShowScroller from '../components/ShowScroller';
-import {HeaderMenu} from '../components/HeaderMenu';
+import HeaderMenu from '../components/HeaderMenu';
 import SideMenu from 'react-native-side-menu';
 import Menu from '../components/Menu';
+import AdvertBanner from '../components/AdvertBanner'
 import TouchText from '../components/TouchText';
+import {FontAwesome,Ionicons} from '@expo/vector-icons';
+
+import { TabView, SceneMap ,TabBar} from 'react-native-tab-view';
+const FirstRoute = () => (
+  <View style={[styles.scene, { backgroundColor: '#000000' }]}>
+    <View style ={{paddingTop:10,}}>
+
+    {/* <Showcroller dataset='myList'/>
+    <AdvertBanner style={{flex:3}}/> */}
+
+  </View>
+  </View>
+);
+
+
+const SecondRoute = () => (
+  <View style={[styles.scene, { backgroundColor: '#00000' }]} />
+);
+const ThirdRoute =()=>(
+  <View style={[styles.scene, { backgroundColor: '#00000' }]} />
+
+);
+const FourthRoute =()=>(
+  <View style={[styles.scene, { backgroundColor: '#00000' }]} />
+
+);
+
+
 
 
 class Home extends React.Component {
-  static navigationOptions = {
-    header :null
-  }
+  
+
   constructor(props) {
     super(props);
 
     this.state = {
       showHeader: true,
       isOpen:false,
-      top: new Animated.Value(0)
+      top: new Animated.Value(0),
+      active:true,
+      index: 0,
+    routes: [
+      {  key: 'all', title: 'All' },
+      { icon:'file-movie-o' ,key: 'movies', title: 'Movies' },
+      { icon:'music' ,key: 'music', title: 'Music' },
+      { icon:'book',key: 'books', title: 'Books' },
+
+    ],
 
     };
     
-    this.offset = 0;
+    this.offset = 0
 
     this.onScroll = this.onScroll.bind(this);
   }
@@ -74,6 +107,15 @@ class Home extends React.Component {
 
     this.offset = currentOffset;
   }
+  _renderIcon = ({ route, tabStyle}) => {
+    return <FontAwesome style={styles.icon} name={route.icon} size={15} color={colors.white} />;
+  };
+
+  _renderLabel= ({ route, focused, colors }) => (
+    <Text style={{ color:'white',fontFamily:'Montserrat-SemiBold', fontSize:14,margin:3 }}>
+      {route.title}
+    </Text>
+  )
 
   render() {
     // const { navigation } = this.props;
@@ -87,65 +129,81 @@ class Home extends React.Component {
           isOpen={this.state.isOpen}
           onChange={(isOpen) => this.updateMenu(isOpen)}
 
-        >
+      >
       <View style={gStyle.container}>
-        <HeaderMenu toggle={this.toggle.bind(this)}/>
-        {/* <HeaderHome navigation={navigation} show={showHeader}/>  */}
-        {/* <Animated.View style={[styles.container, { top }]}> */}
-         <View style={styles.containerMenu}>
-          
-            <React.Fragment>
+        <HeaderMenu toggle={this.toggle.bind(this)}/> 
+        <View style={styles.tabView}>
+        <React.Fragment>
               <TouchText
+                style={this.state.active? styles.btnActive:styles.btn}
                 onPress={() => navigation.navigate('HomeTvShows')}
                 text="All"
-                textStyle={styles.text}
+                textStyle={styles.text2}
               />
               <TouchText
                 onPress={() => navigation.navigate('HomeMovies')}
                 text="Live Channels"
-                textStyle={styles.text}
+                textStyle={styles.text2}
               />
               <TouchText
                 onPress={() => navigation.navigate('HomeMyList')}
                 text="MooveMart"
-                textStyle={styles.text}
+                textStyle={styles.text2}
               />
             </React.Fragment>
-          
-        </View>
-      {/* </Animated.View> */}
-
+            </View>
+       
+         <ScrollView bounces onScroll={this.onScroll} scrollEventThrottle={16}>
         
+         <PromotionBanner />
+         <TabView
+            navigationState={this.state}
+            scrollEnabled
+            renderScene={SceneMap({
+              all: FirstRoute,
+              movies: SecondRoute,
+              music:FourthRoute,
+              books: ThirdRoute,
 
-        <ScrollView bounces onScroll={this.onScroll} scrollEventThrottle={16}>
-
-         <PromotionBanner/>
+            })}
+            renderTabBar={props =>
+              <TabBar
+                {...props}
+                indicatorStyle={{ backgroundColor: 'white' }}
+                renderLabel={this._renderLabel}
+                style={{ backgroundColor: 'black'}}
+                tabStyle={{flexDirection:'row'}}
+                renderIcon={this._renderIcon}
+              />
+        }
+        onIndexChange={index => this.setState({ index })}
+        initialLayout={{ width: Dimensions.get('window').width }}
+      />
          
 
           <Text style={gStyle.heading}>Recommended for you</Text>
-          <ShowScroller dataset="myList" />
+          <ShowScroller dataset="myList" navigation={this.props.navigation} />
 
-          {/* <ShowScroller dataset="previews" /> */}
-
-          {/* <ShowScroller dataset="previews" type="rectangle" /> */}
 
           <Text style={gStyle.heading}>Recently Added</Text>
-          <ShowScroller dataset="myList" />
+          <ShowScroller dataset="myList" navigation={this.props.navigation} />
 
-          <Text style={gStyle.heading}>Advert</Text>
-          <ShowScroller />
+          <Text></Text>
+          <AdvertBanner/>
+
 
           <Text style={gStyle.heading}>E-Books For You</Text>
-          <ShowScroller />
+          <ShowScroller dataset="myList" navigation={this.props.navigation} />
 
           <Text style={gStyle.heading}>Games For You</Text>
-          <ShowScroller />
+          <ShowScroller dataset="myList" navigation={this.props.navigation} />
+
 
           <View style={gStyle.spacer24} />
 
         </ScrollView>
        
-
+        
 
         <Cast navigation={navigation} />
 
@@ -155,6 +213,7 @@ class Home extends React.Component {
     );
   }
 }
+
 Home.defaultProps = {
   all: true
 };
@@ -176,14 +235,14 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'flex-start',
      backgroundColor: colors.black20,
-    flexDirection: 'row',
-    paddingBottom: 4,
-    paddingHorizontal: 16,
-    marginLeft: 10,
-    paddingTop: device.iPhoneX ? 54 : 30,
-    position: 'absolute',
-    zIndex: 10
-  },
+      flexDirection: 'row',
+      paddingBottom: 4,
+      paddingHorizontal: 16,
+      marginLeft: 10,
+      paddingTop: device.iPhoneX ? 54 : 30,
+      position: 'absolute',
+      zIndex: 10
+    },
   logo: {
     height: 35,
     marginRight: 48,
@@ -196,17 +255,50 @@ const styles = StyleSheet.create({
     paddingLeft: 45,
     backgroundColor:'black',
     width:'100%',
-    justifyContent:'space-between'
-    // flex: 1,
+    justifyContent:'space-between',
+    flex: 1,
   },
   text: {
     color: colors.white,
-    // fontFamily: fonts.medium,
-    fontFamily:'Montserrat-Regular',
+    fontFamily:'Montserrat-Meduim',
     marginRight: 24,
     fontSize: 16,
     fontWeight:'400'
-  }
+  },
+  container2: {
+    marginTop: StatusBar.currentHeight,
+    backgroundColor:'#000000'
+  },
+  
+  tabView:{
+    flexDirection:'row',
+    backgroundColor:'black',
+    paddingTop:15,
+    justifyContent: 'space-between',
+    paddingVertical: 10
+    // paddingLeft:25,
+
+  },
+  text2:{
+    fontSize:14,
+    fontWeight:'600',
+    fontStyle: 'normal',
+    fontFamily:'Montserrat-SemiBold',
+    paddingLeft:40,
+    paddingRight:30,
+  },
+  btnActive:{
+    backgroundColor:'#ed1212'
+  },
+    icon:{
+      // backgroundColor:'#FFFFFF',
+      // borderRadius: 30,      
+      // opacity:0.6,
+      // flex:1,
+      // justifyContent:'center',
+      // alignItems:'center'
+    }
+
 });
 
 export default Home;

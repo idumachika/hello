@@ -21,11 +21,11 @@ export const HeaderMenu = props =>(
 const styles = StyleSheet.create({
     container:{
         flexDirection:'row',
-        height:'18%',
         width:'100%',
         alignItems:'center',
         backgroundColor: 'black',
-        paddingHorizontal: 15,
+        paddingTop: 55,
+        paddingHorizontal: 20,
         // justifyContent: 'space-between'
     },
     logo:{

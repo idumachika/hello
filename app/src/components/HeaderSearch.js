@@ -152,6 +152,7 @@ class HeaderSearch extends React.Component {
         <ScrollView>
           <FlatList style={{marginHorizontal:5}}
           data={this.state.data}
+          keyExtractor={item => item.key.toString()}
           renderItem={({item})=>this._renderItem(item)}/>
         </ScrollView>
       </View>
@@ -164,7 +165,7 @@ const styles = StyleSheet.create({
    
     backgroundColor: colors.black,
     flexDirection: 'row',
-    paddingBottom: 12,
+    paddingBottom: 17,
     paddingHorizontal: 8,
     paddingTop: device.iPhoneX ? 54 : 30,
     width: '100%'
@@ -180,7 +181,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'center',
     paddingHorizontal: 8,
-    paddingVertical: 4
+    paddingVertical: 4,
+    marginTop: 20,
   },
   containerCancel: {
     width: '20%'
@@ -190,7 +192,8 @@ const styles = StyleSheet.create({
     fontFamily: fonts.light,
     fontSize: 16,
     paddingVertical: 4,
-    textAlign: 'center'
+    textAlign: 'center',
+    paddingTop:30
   },
   // iconInputClose:{
   //   position:'absolute',
@@ -199,12 +202,13 @@ const styles = StyleSheet.create({
   //   backgroundColor:'transparent',
   //   zIndex:1
   // },
-  // image:{
-  //   marginRight:5,
-  //   width:115,
-  //   height: 170
+  image:{
+    marginRight:5,
+    width:115,
+    height: 170,
+    backgroundColor:'white'
 
-  // }
+  }
 });
 
 export default HeaderSearch;

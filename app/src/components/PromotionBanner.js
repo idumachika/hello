@@ -1,19 +1,32 @@
 import React from 'react';
-import { Image, ImageBackground, Dimensions, Text, StyleSheet, View } from 'react-native';
-import { gStyle, images } from '../constants';
-
-import PromotionPlay from './PromotionPlay';
-import TouchTextIcon from './TouchTextIcon';
-
-import SvgCheck from './icons/Svg.Check';
-import SvgInfo from './icons/Svg.Info';
-import SvgPlus from './icons/Svg.Plus';
+import { TouchableOpacity, ImageBackground, Image, Dimensions, Text, StyleSheet, View } from 'react-native';
 import Swiper from 'react-native-swiper';
-const {width} =Dimensions.get('window')
+const {width} =Dimensions.get('window');
+import { LinearGradient } from 'expo-linear-gradient';
+
+
 
 const Slider = props =>(
   <View style={styles.container}>
-    <Image style={styles.image} source={props.uri}/>
+    
+    <ImageBackground style={styles.image} source={props.uri}>
+
+      <View style={{flexDirection:'row'}}>
+
+      <View style={{ marginStart:20, paddingTop:'75%', flex:1}}>
+      
+        <Text style={styles.title}>Lion Heart</Text>
+        <Text style={{color:'white',fontSize:20}}> <Text style={{fontWeight:'500',fontFamily:'Montserrat-SemiBold',}}>PG</Text> 2018</Text>
+        <Text style={{color:'white',fontSize:15,fontFamily:'Montserrat-Regular',marginStart:5}}>Nollywood</Text>
+        </View>
+          <TouchableOpacity style={{ marginTop:'90%', paddingLeft:20,paddingRight:20}}>
+          <Image source={require('../../src/assets/images/content/plays.png')}/>
+          </TouchableOpacity>
+     </View>
+
+   
+     
+    </ImageBackground>
 
   </View>
 )
@@ -25,31 +38,48 @@ class PromotionBanner extends React.Component {
     super(props);
       this.state ={
         ImagesSlider:[
+          
           require('../assets/images/content/black-mirror-bandersnatch.jpg'),
           require('../assets/images/content/good-will-hunting.jpg'),
           require('../assets/images/content/peaky-blinders.jpg'),
-          require('../assets/images/content/john-mulaney-kid-gorgeous.jpg'),
-        ]
-       
+          // require('../assets/images/content/john-mulaney-kid-gorgeous.jpg'),
+          ],
+          ImageTitle:[
+            {
+              "id":1,
+              "title":"Black Mirrow",
+              "year":"2018"
+  
+            },
+            {
+              "id":2,
+              "title":"Good will hunting",
+              "year":"2018"
+  
+              
+            },
+            {
+              "id":3,
+              "title":"Peaky Blinders",
+              "year":"2018"
+  
+              
+            },
+            {
+              "id":4,
+              "title":"john-mulaney-kid-gorgeous",
+              "year":"2018"
+          }
+          ]
+  
         
-      }
-    // this.state = {
-    //   added: false
-    // };
-
-    // this.myListPress = this.myListPress.bind(this);
+        }
   }
 
-  // myListPress() {
-  //   this.setState(prevState => ({
-  //     added: !prevState.added
-  //   }));
-  // }
-
   render() {
-    const { added } = this.state;
+    // const { added } = this.state;
 
-    const icon = added ? <SvgCheck /> : <SvgPlus />;
+    // const icon = added ? <SvgCheck /> : <SvgPlus />;
 
     return (
       <View>
@@ -61,33 +91,13 @@ class PromotionBanner extends React.Component {
             uri={item}
             key={i}/>)
           }
+          
+          
          
         </Swiper>
         </View>
 
-      // <ImageBackground
-      //   imageStyle={{ resizeMode: 'contain' }}
-      //   source={images.bannerBander}
-      //   style={styles.imageBackground}
-      // >
-      //   <View style={styles.containerContent}>
-      //     <Image source={images.logoBander} style={styles.image} />
-
-      //     <View style={gStyle.flexRowSpace}>
-      //       <TouchTextIcon
-      //         icon={icon}
-      //         onPress={this.myListPress}
-      //         text="My List"
-      //       />
-      //       <PromotionPlay onPress={() => null} />
-      //       <TouchTextIcon
-      //         icon={<SvgInfo />}
-      //         onPress={() => null}
-      //         text="Info"
-      //       />
-      //     </View>
-      //   </View>
-      // </ImageBackground>
+     
     );
   }
 }
@@ -101,22 +111,15 @@ const styles = StyleSheet.create({
       flex:1,
       width,
     },
+    title:{
+      fontFamily:'Montserrat-SemiBold',
+      fontSize: 32,
+      color:'white',
+      paddingTop:20
+
+    }
    
-  // imageBackground: {
-  //   height: 480
-  // },
-  // containerContent: {
-  //   bottom: 24,
-  //   position: 'absolute',
-  //   width: '100%',
-  //   zIndex: 1
-  // },
-  // image: {
-  //   alignSelf: 'center',
-  //   height: 69,
-  //   marginBottom: 24,
-  //   width: 291
-  // }
+  
 });
 
 export default PromotionBanner;

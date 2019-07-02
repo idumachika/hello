@@ -10,6 +10,8 @@ import {
     AsyncStorage,
     Image
 } from 'react-native';
+import { Ionicons} from '@expo/vector-icons';
+
 
 export class Register extends React.Component{
 
@@ -27,14 +29,19 @@ export class Register extends React.Component{
             source={ require('../sections/img/logo.png')}/>
         ),
         
-        // title: 'Help',
+        title: 'Help',
         headerStyle: {
           backgroundColor: '#2F7DD8',
         },
         headerTintColor: '#fff',
         headerTitleStyle: {
           fontWeight: 'bold',
-         
+          position: 'absolute',
+          left: '70.57%',
+          right: '5.8%',
+          top:'40%',
+          fontSize:17,
+          fontFamily:'Montserrat-SemiBold'       
         },
     }
 
@@ -43,9 +50,20 @@ export class Register extends React.Component{
         this.state={
             fullname:'',
             username:'',
-            password:''
+            isPassword:true,
+            eye: 'md-eye-off'
         }
     }
+    changePwdType = () => {
+        const { isPassword } = this.state;
+        // set new state value
+        this.setState({
+            eye: isPassword ? "ios-eye" : "md-eye-off",
+            isPassword: !isPassword,
+        });
+
+    };
+    
 
     cancelRegister=()=>{
         Alert.alert('Registration cancelled');
@@ -73,6 +91,8 @@ export class Register extends React.Component{
     }
 
     render(){
+        const { eye, isPassword } = this.state;
+
         return(
             
 
@@ -98,13 +118,20 @@ export class Register extends React.Component{
 
                 <View style={styles.inputContainer}>
                 <TextInput style={styles.inputs}
-                    placeholder="Password"
+                    secureTextEntry={this.state.isPassword}
                     placeholderTextColor='#6B6B6B'
-                    underlineColorAndroid='transparent'
-                    onChangeText={(password) => this.setState({password})}/>
+                    placeholder="password"
+                    underlineColorAndroid="transparent"
+                    onChangeText={(isPassword) => this.setState({isPassword})}/>
+
+                <Ionicons style={styles.icon}
+                    name={eye}
+                    size={25}
+                    color="#6B6B6B"
+                    onPress={this.changePwdType}/>
                 </View>
 
-                <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={this.registerAccount}>
+                <TouchableHighlight  underlayColor='rgb(255, 255, 255)' style={[styles.buttonContainer, styles.loginButton]} onPress={this.registerAccount}>
                 <Text style={styles.loginText}>Sign Up</Text>
                 </TouchableHighlight>
 
@@ -197,6 +224,14 @@ const styles = StyleSheet.create({
         right: '32.19%',
         top: '7.47%',
         bottom: '88.45%',
+    },
+    icon:{
+        flex:1,
+        position: 'absolute',
+        left: '90.44%',
+        top: '25.9%',
+        
+               
     }
     
   });

@@ -25,7 +25,7 @@ const Downloads = ({ navigation }) => (
     </Text>
 
     <View style={styles.button}>
-      <Text style={styles.buttonText}>FIND SOMETHING TO DOWNLOAD</Text>
+      <Text style={styles.buttonText}>FIND MORE TO DOWNLOAD</Text>
     </View>
 
     <Cast navigation={navigation} />

@@ -1,15 +1,41 @@
 import React from 'react';
-import { StyleSheet,BackHandler, Text, Image, View,ImageBackground } from 'react-native';
+import { StyleSheet,BackHandler, Text, Image, View,ImageBackground,Dimensions } from 'react-native';
 import {Header} from '../sections/Header';
 import {Menu} from '../sections/Menu';
 import * as Font from 'expo-font'
 import { StackNavigator } from 'react-navigation'
+import { AppLoading, Asset, Video } from 'expo';
+const { height, width,MaterialIcons, Octicons } = Dimensions.get('window');
+
+
 
 export  class Home extends React.Component {
+
+    constructor(props){
+        super(props);
+        this.state={
+          loaded: false,
+          videoHeight: height,
+          videoWidth: width,
+          currentVideo: 0,
+            mute: false,
+            shouldPlay: true,
+        }
+      }
     
     static navigationOptions = {
         header :null
     }
+    handlePlayAndPause = () => {
+        this.setState((prevState) => ({
+           shouldPlay: !prevState.shouldPlay
+        }));
+      }
+      handleVolume = () => {
+         this.setState((prevState) => ({
+            mute: !prevState.mute
+         }));
+      }
     /////***** HANDLE BACK PRESS ******//////
   componentWillMount() {
     // Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.PORTRAIT);
@@ -31,10 +57,16 @@ export  class Home extends React.Component {
     render(){
         const { navigate } = this.props.navigation
         return (
-            <View style={styles.container}>  
-
-
-                <ImageBackground   source={require('../sections/img/Rectangle.png')} style={styles.container}>
+            <View style={styles.container}>
+{/* 
+                <Video
+                 source={{ uri:    
+                    'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4' }}
+                 shouldPlay={this.state.shouldPlay}
+                 resizeMode="cover"
+                 style={{ flex:1, opacity:0.3, backgroundColor:'#000000' }}
+                 isMuted={this.state.mute}
+               />   */}
                 <Image
                     source={require('../sections/img/logo.png')}
                     style={styles.logo}>
@@ -43,7 +75,6 @@ export  class Home extends React.Component {
 
                 <Text style={styles.text}>Your Home of MultiContent channels SignUp Now and enjoy moovetv</Text>
                     <Menu navigate = {navigate}/> 
-                </ImageBackground>
                
 
             </View>
@@ -58,8 +89,8 @@ const styles = StyleSheet.create({
         flex:1,
         backgroundColor: '#2F7DD8',
         justifyContent: 'center',
-        width: null,
-        height: null,
+        // width: null,
+        // height: null,
     
     },
     inputIcon:{

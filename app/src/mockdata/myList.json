@@ -12,26 +12,31 @@
   {
     "id": 3,
     "image": "johnMulaneyKG",
-    "title": "John Mulaney Kid Gorgeous at Radio City"
+    "title": "John Mulaney Kid Gorgeous Radio City"
   },
-  {
-    "id": 4,
-    "title": "Show 4"
+  { 
+    "id":4,
+    "image":"GiantAwaken",
+    "title":"Awaken The Giant Within"
   },
   {
     "id": 5,
-    "title": "Show 5"
+    "title": "Show 4"
   },
   {
     "id": 6,
-    "title": "Show 6"
+    "title": "Show 5"
   },
   {
     "id": 7,
-    "title": "Show 7"
+    "title": "Show 6"
   },
   {
     "id": 8,
+    "title": "Show 7"
+  },
+  {
+    "id": 9,
     "title": "Show 8"
   }
 ]

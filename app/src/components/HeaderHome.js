@@ -91,11 +91,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingBottom: 4,
     paddingHorizontal: 16,
-    marginLeft: 10,
     paddingTop: device.iPhoneX ? 54 : 30,
     position: 'absolute',
-    zIndex: 10,
-    width:'100%'
+    width: '100%',
+    zIndex: 10
   },
   logo: {
     height: 35,
@@ -105,20 +104,13 @@ const styles = StyleSheet.create({
   containerMenu: {
     alignItems: 'center',
     flexDirection: 'row',
-    height:150,
-    width:'100%',
-    flex: 1,
-    justifyContent: 'space-between'
+    height: 35,
+    flex: 1
   },
   text: {
     color: colors.white,
-    // fontFamily: fonts.medium,
-    fontFamily:'Montserrat-Regular',
-    marginRight: 50,
-    fontSize: 16,
-    justifyContent:'center',
-    alignItems:'center',
-    fontWeight:'400'
+    fontFamily: fonts.medium,
+    marginRight: 24
   }
 });
 

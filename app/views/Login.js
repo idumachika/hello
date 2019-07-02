@@ -10,7 +10,10 @@ import {
     AsyncStorage,
     Image
 } from 'react-native';
-import { LinearGradient } from 'expo';
+import { TextField } from 'react-native-material-textfield';
+import { Ionicons} from '@expo/vector-icons';
+
+
 
 
 export class Login extends React.Component{
@@ -28,13 +31,20 @@ export class Login extends React.Component{
             source={ require('../sections/img/logo.png')}/>
         ),
         
-        // title: 'MooveTV',
+        title: 'Help',
         headerStyle: {
           backgroundColor: '#2F7DD8',
         },
         headerTintColor: '#fff',
         headerTitleStyle: {
           fontWeight: 'bold',
+            position: 'absolute',
+            left: '70.57%',
+            right: '5.8%',
+            top:'40%',
+            fontSize:17,
+            fontFamily:'Montserrat-SemiBold'       
+
         },
     }
 
@@ -42,11 +52,25 @@ export class Login extends React.Component{
         super(props);
         this.state={
             username:'',
-            password:'',
+            isPassword:true,
+            eye: 'md-eye-off',
            
         }
     }
     
+    getRef = (ref) => {
+        if (this.props.getRef)
+            this.props.getRef(ref)
+    }
+    changePwdType = () => {
+        const { isPassword } = this.state;
+        // set new state value
+        this.setState({
+            eye: isPassword ? "ios-eye" : "md-eye-off",
+            isPassword: !isPassword,
+        });
+
+    };
     
 
     cancelLogin=()=>{
@@ -89,6 +113,8 @@ export class Login extends React.Component{
 
     render(){
         const { navigate } = this.props.navigation;
+        const { iconSize, iconColor, label, style } = this.props;
+        const { eye, isPassword } = this.state;
 
         
         return(
@@ -107,18 +133,24 @@ export class Login extends React.Component{
                 
                 <View style={styles.inputContainer}>
                 <TextInput style={styles.inputs}
-                    placeholder="Password"
-                    secureTextEntry={true}
+                    secureTextEntry={this.state.isPassword}
                     placeholderTextColor='#6B6B6B'
-                    underlineColorAndroid='transparent'
-                    onChangeText={(password) => this.setState({password})}/>
+                    placeholder="password"
+                    underlineColorAndroid="transparent"
+                    onChangeText={(isPassword) => this.setState({isPassword})}/>
+
+                <Ionicons style={styles.icon}
+                    name={eye}
+                    size={25}
+                    color="#6B6B6B"
+                    onPress={this.changePwdType}/>
                 </View>
 
-                <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={()=>this.props.navigation.navigate('StackRT')}>
+                <TouchableHighlight underlayColor='#2F7DD8' style={[styles.buttonContainer, styles.loginButton]} onPress={()=>this.props.navigation.navigate('StackRT')}>
                 <Text style={styles.loginText}>Sign In</Text>
                 </TouchableHighlight>
 
-                <TouchableHighlight style={styles.buttonContainer} onPress={this.cancelLogin}>
+                <TouchableHighlight  underlayColor='#2F7DD8' style={styles.buttonContainer} onPress={this.cancelLogin}>
                     <Text style={styles.recoverText}>Recover password?</Text>
                 </TouchableHighlight>
             </View>
@@ -204,6 +236,15 @@ const styles = StyleSheet.create({
         fontFamily: 'Montserrat-Regular'
 
 
+    },
+    icon:{
+        flex:1,
+        position: 'absolute',
+         left: '90.44%',
+        // right: '13.69%',
+        top: '25.9%',
+            // bottom: '31.63%',     
     }
     
   });
+  

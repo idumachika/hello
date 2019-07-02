@@ -6,6 +6,7 @@ import {
     View,
     Text,
     Image,
+    TouchableHighlight,
     ScrollView
 
 } from 'react-native'
@@ -123,6 +124,12 @@ class Menu extends Component{
                          size={15}/>
                     </View>
                 </ScrollView>
+                <View style={styles.signOutContainer}>
+                    <View style={styles.SignoutIcon}>
+                        <FontAwesome name="sign-out" size={25} color="white"/>
+                        <Text style={styles.textIcon}>Sign Out</Text>
+                    </View>
+                </View>
             </View>
         )
     }
@@ -142,7 +149,7 @@ const styles = StyleSheet.create({
         width:width / 2 + 59,
         borderColor:'#EDEDED',
         backgroundColor:'#2F7DD8',
-        borderBottomWidth:3,
+        borderBottomWidth:1,
         paddingHorizontal:20,
         paddingVertical:30,
         height:"25%",
@@ -162,7 +169,7 @@ const styles = StyleSheet.create({
     text:{
         color:'#4F4F4F',
         fontSize: 15,
-        fontFamily:'Montserrat-Regular'
+        fontFamily:'Montserrat-Meduim'
     },
     textWithIcon:{
         flexDirection:'row',
@@ -170,7 +177,8 @@ const styles = StyleSheet.create({
         paddingVertical:15,
         alignItems:'center',
         borderColor:'#EDEDED',
-        borderBottomWidth:3,
+        borderBottomWidth:1,
+        borderLeftWidth: 5,
     },
     widthIcon:{
         flexDirection:'row',
@@ -191,7 +199,31 @@ const styles = StyleSheet.create({
     textName:{
         color:'white',
         fontSize: 15,
-        fontFamily:'Montserrat-Regular'
+        fontFamily:'Montserrat-SemiBold'
+    },
+    signOutContainer:{
+        flexDirection:'row',
+        justifyContent:'space-between',
+        alignItems:'center',
+        width:width / 2 + 59,
+        borderColor:'#EDEDED',
+        backgroundColor:'#2F7DD8',
+        paddingHorizontal:20,
+        paddingVertical:30,
+        height:"10%",
+        width:'100%'
+
+    },
+    SignoutIcon:{
+        flexDirection:"row",
+        alignItems:'center',
+        paddingLeft: 50,
+    },
+    textIcon:{
+        textAlign:'center',
+        color:'white',
+        fontSize: 15,
+        fontFamily:'Montserrat-SemiBold'
     }
 
 })

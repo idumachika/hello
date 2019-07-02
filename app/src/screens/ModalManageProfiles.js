@@ -5,8 +5,8 @@ import { colors, fonts, gStyle, images } from '../constants';
 
 import HeaderManage from '../components/HeaderManage';
 
-import SvgEdit from '../components/icons/Svg.Edit';
-import SvgPlus from '../components/icons/Svg.Plus';
+// import SvgEdit from '../components/icons/Svg.Edit';
+// import SvgPlus from '../components/icons/Svg.Plus';
 
 const ModalManageProfiles = ({ navigation }) => (
   <View style={[gStyle.container, { backgroundColor: colors.black }]}>
@@ -14,16 +14,16 @@ const ModalManageProfiles = ({ navigation }) => (
 
     <View style={styles.container}>
       <View style={styles.containerUser}>
-        <Image source={images.robot} style={styles.avatar} />
-        <Text style={styles.text}>Caleb</Text>
+        {/* <Image source={images.robot} style={styles.avatar} /> */}
+        {/* <Text style={styles.text}>Caleb</Text> */}
         <View style={styles.overlay} />
         <View style={styles.containerSvg}>
           <SvgEdit active size={40} />
         </View>
       </View>
       <View style={styles.containerUser}>
-        <Image source={images.penguin} style={styles.avatar} />
-        <Text style={styles.text}>Kim</Text>
+        {/* <Image source={images.penguin} style={styles.avatar} /> */}
+        {/* <Text style={styles.text}>Kim</Text> */}
         <View style={styles.overlay} />
         <View style={styles.containerSvg}>
           <SvgEdit active size={40} />

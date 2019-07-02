@@ -86,7 +86,7 @@ const AppSettings = ({ navigation }) => {
           </View>
           <View style={styles.containerIndexBlock}>
             <View style={[styles.indexBlock, styles.netflix]} />
-            <Text style={styles.deviceText}>Netflix</Text>
+            <Text style={styles.deviceText}>MoooveTv</Text>
           </View>
           <View style={styles.containerIndexBlock}>
             <View style={[styles.indexBlock, styles.storage]} />

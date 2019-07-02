@@ -47,8 +47,7 @@ export class Video extends  React.Component{
                             imageSrc={item.snippet.thumbnails.high.url}
                             
                             />
-                        }
-                    />
+                        }/>
 
                 </View>
             )}
